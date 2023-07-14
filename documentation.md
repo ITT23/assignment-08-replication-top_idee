@@ -80,13 +80,13 @@ Things you need:
 * Solder-stuff
 * 3D Printer to print the box itself
 
-![1689355382333](image/documentation/1689355382333.png)
+![parts](./assets/pedal_parts.jpg)
 
 #### Design
 
 The Pedal was designed in Blender with focus on easy assembly. The top has a slope to mimic a foot pedal and a hole to put in a Aracade-Button with 30mm diameter. On the bottom holes were included to secure a Raspberry Pi Pico and two flaps were designed to screw the bottom and top together. 
 
-![1689354234309](image/documentation/1689354234309.png)
+![blender design](./assets/pedal_blender.gif)
 
 #### Code
 
@@ -96,7 +96,7 @@ On the Pico we imported the `adafruit-midi`-library to have a MIDI-output. Throu
 
 After two iterations of printing, we decided to let it be and do the missing things (place for nuts to be hold) with hot glue instead. Like in the code mentioned one button pin is soldered to the GPIO-pin-6 of the Pico and the other one to the 3.3V out (Pin 36). The Pico is then screwed on to the bottom with four M2 screws and nuts and the button is firmly placed in the top-hole. We then put glue on the inside of the button to prevent jiggly pressed and also glued on the M3 nuts onto the inside of the screw flaps of the bottom part. Bottom and top part were then put together and secured with the M3 screws.
 
-![1689355388252](image/documentation/1689355388252.png)
+![assembly](./assets/assembly.jpg)
 
 ### Software-Stuff
 
