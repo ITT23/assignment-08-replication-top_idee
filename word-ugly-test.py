@@ -46,8 +46,10 @@ class GameManger:
         return images
 
     def _get_image_to_show(self, letter, images):
+        print(letter)
         for mapped_letter in images: #self.images
             if mapped_letter[0] == letter:
+                print(mapped_letter[1])
                 return mapped_letter[1]
             
     def _draw(self):
@@ -99,7 +101,6 @@ class Level_One:
         self.game_mngr.label.text = self.text_to_show
         self.image_to_show = pyglet.image.load(self.game_mngr._get_image_to_show(self.text_to_show.lower(), self.mapped_images))
 
-
     def _draw(self):
         self.image_to_show.blit(25,200)
 
@@ -120,8 +121,36 @@ class Level_Two:
         pass
         
 
+class Menu():
+
+    def __init__(self):
+        self.menu_visible = True
+        self.color_unselected = (0,240,0,255) # green
+        self.color_selected = (255,0,0,255) # red
+        self.menu_item_width = 200
+        self.menu_item_height = 50
+        self.menu_items = [pyglet.shapes.Rectangle(x=10, y=10, width=self.menu_item_width, height=self.menu_item_height, color=self.color_selected),
+                           pyglet.shapes.Rectangle(x=10, y=300, width=self.menu_item_width, height=self.menu_item_height, color=self.color_unselected),
+                           ]
+        self.selected_item = 0 # bottom one
+
+    def draw_menu(self):
+        for item in self.menu_items:
+            item.draw()
+
+    def reset_colors(self):
+        for item in self.menu_items:
+            item.color = self.color_unselected
+    
+    # visually sets the menu item as marked/selected
+    def update_menu(self, direction: int):
+        if self.selected_item + direction < len(self.menu_items) and self.selected_item + direction >= 0: # index must stay in boundaries of list-items
+            self.selected_item += direction 
+            self.reset_colors()
+            self.menu_items[self.selected_item].color = self.color_selected
 
 window = pyglet.window.Window(WINDOW_WIDTH, WINDOW_HEIGHT)
+menu = Menu()
 game_mngr = GameManger()
 lvl_one = Level_One(game_mngr)
 lvl_two = Level_Two(game_mngr)
@@ -131,29 +160,47 @@ levels = [lvl_one,lvl_two]
 
 @window.event
 def on_text(text):
-    print(game_mngr.score)
-    game_mngr.input_text.text += text.upper()
-    current_state_correct, word_correct = game_mngr._check_input()
-    if current_state_correct and not word_correct:
-        # bist aufm richtigen weg schnuggi
-        pass
-    elif current_state_correct and word_correct:
-        # new word bitch
-        game_mngr.input_text.text = ""
-        # array abfrage was menu grad fürn modus hat (im game_mngr?)
+    if not menu.menu_visible:
+        game_mngr.input_text.text += text.upper()
+        current_state_correct, word_correct = game_mngr._check_input()
+        if current_state_correct and not word_correct:
+            # bist aufm richtigen weg schnuggi
+            pass
+        elif current_state_correct and word_correct:
+            # new word bitch
+            game_mngr.input_text.text = ""
+            # array abfrage was menu grad fürn modus hat (im game_mngr?)
+            levels[game_mngr.mode]._get_new_text()
+            #lvl_one._get_new_text()
+        else:
+            #print(game_mngr.input_text.text)
+            game_mngr.input_text.text = ""
+            pass
+
+@window.event
+def on_key_press(symbol, modifier):         
+    if symbol == pyglet.window.key.UP:
+        menu.update_menu(1) # upwards direction
+    elif symbol == pyglet.window.key.DOWN:
+        menu.update_menu(-1) # downwards direction
+    elif symbol == pyglet.window.key.SPACE:
+        menu.menu_visible = False
+        game_mngr.mode = menu.selected_item
         levels[game_mngr.mode]._get_new_text()
-        #lvl_one._get_new_text()
-    else:
-        #print(game_mngr.input_text.text)
-        game_mngr.input_text.text = ""
-        pass
 
 @window.event
 def on_draw():
     window.clear()
-    game_mngr._update_game_stats()
-    game_mngr._draw()
-    levels[game_mngr.mode]._draw()
+    if menu.menu_visible:
+        menu.draw_menu()
+    else:
+        game_mngr._update_game_stats()
+        game_mngr._draw()
+        levels[game_mngr.mode]._draw()
+
+@window.event
+def on_show():
+    levels[game_mngr.mode]._get_new_text()
 
 if __name__ == "__main__":
     pyglet.app.run()
