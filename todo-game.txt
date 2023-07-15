@@ -1,0 +1,6 @@
+- level 1: mapping (pics)
+- level 2: free trying (alphabet only - maybe help function)
+- level 3: type words
+- level 4: type sentences
+- level 5: chords (pics)
+- level 6: free trying
