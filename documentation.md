@@ -39,7 +39,6 @@ PianoText: redesigning the piano keyboard for text entry | Feit et al., 2014 | [
 
 *insert short summary here*
 
-
 ## 2. Preparation
 
 For replicating the interaction technique in the paper we needed a few things:
@@ -58,15 +57,15 @@ Software-related:
 
 ### Hardware-Stuff
 
-As mentioned we stole the piano from the media informatics lab. (some specifications here).
+As mentioned we stole the piano from the media informatics lab. (Nektar Impact GX 61 - some specifications here).
 
-Since we feared that the village talk was getting out of hand, we decided to quickly assemble a miniature MIDI controller based on a Raspberry Pi Pico running on CircuitPython. You can see the code in the `midi-controller`-folder. Things needed:
+Since we feared that the village talk was getting out of hand, we decided to quickly assemble a miniature MIDI controller based on a Raspberry Pi Pico running on CircuitPython. You can see the code in the `assets/midi-controller`-folder. Things needed:
 
 * Raspberry Pi Pico
 * 5 Buttons
 * 10 Jumpercables
 
-In the paper it was mentioned that the space-bar was not mapped on the keys, but on the foot pedal of the piano. Our stolen keyboard didn't had a foot pedal though, so we decided to assemble a pedal on our own. Like the test-midi-controller we build the pedal on a Raspberry Pi Pico running with? CircuitPython. We invested time and hard work to design, build and code the pedal box. 
+In the paper it was mentioned that the space-bar was not mapped on the keys, but on the foot pedal of the piano. Our stolen keyboard didn't had a foot pedal though, so we decided to assemble a pedal on our own. Like the test-midi-controller we build the pedal on a Raspberry Pi Pico running with? CircuitPython. We invested time and hard work to design, build and code the pedal box only for a space input.
 
 Things you need:
 
@@ -84,13 +83,13 @@ Things you need:
 
 #### Design
 
-The Pedal was designed in Blender with focus on easy assembly. The top has a slope to mimic a foot pedal and a hole to put in a Aracade-Button with 30mm diameter. On the bottom holes were included to secure a Raspberry Pi Pico and two flaps were designed to screw the bottom and top together. 
+The Pedal was designed in Blender with focus on easy assembly. The top has a slope to mimic a foot pedal and a hole to put in a Aracade-Button with 30mm diameter. On the bottom holes were included to secure a Raspberry Pi Pico and two flaps were designed to screw the bottom and top together.
 
 ![blender design](./assets/docu/pedal_blender.gif)
 
 #### Code
 
-On the Pico we imported the `adafruit-midi`-library to have a MIDI-output. Through the button press the MIDI-note 0 will get played/streamed, since this note is not likely to be played on normal pianos. The code can be seen in the `pico-pedal.py`-file in the `pedal`-folder. The library used is also linked. For the button input we chose the GPIO-Pin-6. 
+On the Pico we imported the `adafruit-midi`-library to have a MIDI-output. Through the button press the MIDI-note 0 will get played/streamed, since this note is not likely to be played on normal pianos. The code can be seen in the `pico-pedal.py`-file in the `assets/pedal`-folder. The library used is also linked. For the button input we chose the GPIO-Pin-6.
 
 #### Assembly
 

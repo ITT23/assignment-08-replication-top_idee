@@ -9,12 +9,15 @@ WINDOW_HEIGHT = 400
 
 class Game:
 
-    def __init__(self) -> None:
+    def __init__(self, show_helper_images: bool, folder = None) -> None:
+        self.level_with_images = show_helper_images
         self.correct_characters = 0
-        self.image_folder = "./assets/game/mapping"
-        self.images = self._get_mapping_images(self.image_folder)
+        self.image_folder = folder
         self.shown_text = random.choice(string.ascii_uppercase)
-        self.shown_image = pyglet.image.load(self._get_image_to_show(self.shown_text.lower()))
+        if self.level_with_images:
+            self.images = self._get_mapping_images(self.image_folder)
+            
+            self.shown_image = pyglet.image.load(self._get_image_to_show(self.shown_text.lower()))
 
         self.label = pyglet.text.Label(text=self.shown_text,
                                        font_name="Arial",
@@ -57,28 +60,33 @@ class Game:
         self.label.draw()
         self.input_text.draw()
         self.score_text.draw()
-        self.shown_image.blit(25,200)
+        if self.level_with_images:
+            self.shown_image.blit(25,200)
 
     def _check_input(self):
         input_lenght = len(self.input_text.text)
         if input_lenght == len(self.shown_text):
             self.input_text.text = ""
-            self.shown_text = random.choice(string.ascii_uppercase)
-            self.shown_image = pyglet.image.load(self._get_image_to_show(self.shown_text.lower()))
+            if self.level_with_images:
+                self.shown_text = random.choice(string.ascii_uppercase)
+                self.shown_image = pyglet.image.load(self._get_image_to_show(self.shown_text.lower()))
+            else:
+                self.shown_text = "test".upper()
             self.label.text = self.shown_text
         elif self.input_text.text == self.shown_text[:input_lenght]:
             self.score += 20
         else:
             self.input_text.color = (255,0,0,255)
-            print("wrong")
 
 window = pyglet.window.Window(WINDOW_WIDTH, WINDOW_HEIGHT)
-game = Game()
+#lvl_one = Game(True, "./assets/game/mapping")+
+lvl_one = Game(False)
+
 
 @window.event
 def on_text(text):
-    game.input_text.text += text.upper()
-    game._check_input()
+    lvl_one.input_text.text += text.upper()
+    lvl_one._check_input()
 
 # @window.event
 # def on_key_press(symbol, modifiers):
@@ -88,7 +96,7 @@ def on_text(text):
 @window.event
 def on_draw():
     window.clear()
-    game._draw()
+    lvl_one._draw()
 
 if __name__ == "__main__":
     pyglet.app.run()
