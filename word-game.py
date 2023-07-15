@@ -1,5 +1,8 @@
 import pyglet
 import sys
+import os
+import string
+import random
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 400
@@ -7,21 +10,24 @@ WINDOW_HEIGHT = 400
 class Game:
 
     def __init__(self) -> None:
-        self.current_sentece = "ja moin diggah".upper()
         self.correct_characters = 0
-        self.label = pyglet.text.Label(text=self.current_sentece,
+        self.image_folder = "./assets/game/mapping"
+        self.images = self._get_mapping_images(self.image_folder)
+        self.shown_text = random.choice(string.ascii_uppercase)
+        self.shown_image = pyglet.image.load(self._get_image_to_show(self.shown_text.lower()))
+
+        self.label = pyglet.text.Label(text=self.shown_text,
                                        font_name="Arial",
                                        font_size=20,
                                        x = WINDOW_WIDTH // 2,
-                                       y = WINDOW_HEIGHT // 2,
-                                       anchor_x='center',
-                                       anchor_y='center')
+                                       y = WINDOW_HEIGHT // 2 - 50,
+                                       anchor_x='center')
         self.input_text = pyglet.text.Label(text="",
                                        font_name="Arial",
                                        font_size=20,
                                        color=(200,225,120,255),
                                        x = WINDOW_WIDTH // 2,
-                                       y = WINDOW_HEIGHT // 2 - 100,
+                                       y = WINDOW_HEIGHT // 2 - 150,
                                        anchor_x='center',
                                        anchor_y='center')
         self.score = 0
@@ -30,16 +36,37 @@ class Game:
                                        font_size=10,
                                        color=(255,255,255,255),
                                        x = 20,
-                                       y = WINDOW_HEIGHT - 20,)
+                                       y = WINDOW_HEIGHT - 20)
         
+    def _get_mapping_images(self, folder):
+        images = []
+        for filename in os.listdir(folder):
+            if filename.endswith(".jpg"):
+                letter = filename.split("_")[1].split(".")[0]
+                complete_path = os.path.join(folder, filename)
+                images.append((letter, complete_path))
+        return images
+
+    def _get_image_to_show(self, letter):
+        for mapped_letter in self.images:
+            if mapped_letter[0] == letter:
+                return mapped_letter[1]
+
+
     def _draw(self):
         self.label.draw()
         self.input_text.draw()
         self.score_text.draw()
+        self.shown_image.blit(25,200)
 
     def _check_input(self):
         input_lenght = len(self.input_text.text)
-        if self.input_text.text == self.current_sentece[:input_lenght]:
+        if input_lenght == len(self.shown_text):
+            self.input_text.text = ""
+            self.shown_text = random.choice(string.ascii_uppercase)
+            self.shown_image = pyglet.image.load(self._get_image_to_show(self.shown_text.lower()))
+            self.label.text = self.shown_text
+        elif self.input_text.text == self.shown_text[:input_lenght]:
             self.score += 20
         else:
             self.input_text.color = (255,0,0,255)
