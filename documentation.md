@@ -45,7 +45,7 @@ For replicating the interaction technique in the paper we needed a few things:
 
 Hardware:
 
-* Piano - we stole it from the media informatics lab
+* Piano - we stole it from the media informatics lab (after intense hints about the piano we consulted the lecture material of Prof. Dr. Nikolaus Bosch 'Strafrecht Besonderer Teil II - Eigentums und Vermögensdelikte'. We realized that we only actualized 3 of the 4 'objektive Tatbestandsmerkmalen' by asking beforehand. Furthermore in the realm of 'subjektive Tatebestandsmerkmale' we found out that we never could steal it anyway because we intended to bring it back)
 * a second MIDI Controller - because Christoph and Sabrina are seeing each other too often, the village is already talking about them; two controllers = everyone can work on MIDI input on their own
 * Foot pedal - since the stolen piano didn't have one
 
