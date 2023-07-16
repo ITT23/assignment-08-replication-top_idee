@@ -6,15 +6,15 @@
 
 ![mapping example](./assets/docu/hotties.jpg)
 
-## 1. Paper-Stuff
+## 1. Paper-Selection
 
 First step was to find a paper that suits the requirements. We had read a few papers we found interesting:
 
 * Preemptive Action: Accelerating Human Reaction using Electrical Muscle Stimulation Without Compromising Agency
   * Kasahara et al., 2019 | [https://doi.org/10.1145/3290605.3300873](https://doi.org/10.1145/3290605.3300873)
   * Reasons against it:
-    * time - research about how to trigger the right muscle contraction
-    * hardware - EMS TENS not available; we bought a cheap one just for fun but it lacks in control functionality
+    * time intensive research about how to trigger the right muscle contraction
+    * hardware - EMS TENS not available; we bought a cheap one just for fun but it lacks in control and functionality
 * Purring Wheel: Thermal and Vibrotactile Notifications on the Steering Wheel
   * San Vito et al., 2020 | [https://doi.org/10.1145/3382507.3418825](https://doi.org/10.1145/3382507.3418825)
   * Reasons against it:
@@ -23,12 +23,12 @@ First step was to find a paper that suits the requirements. We had read a few pa
 * Tactile Wayfinder: A Non-Visual Support System for Wayfinding
   * Heuten et al., 2008 | [https://doi.org/10.1145/1463160.1463179](https://doi.org/10.1145/1463160.1463179)
   * Reasons against it:
-    * hardware - vibration modules to buy
+    * hardware - vibration modules not available
     * application - just another navigation application
 * TeslaTouch: electrovibration for touch surfaces
   * Bau et al., 2010 | [https://doi.org/10.1145/1866029.1866074](https://doi.org/10.1145/1866029.1866074)
   * Reasons against it:
-    * hardware - no idea what we would've needed for it
+    * hardware - not available
 * Touché: enhancing touch interaction on humans, screens, liquids, and everyday objects
   * Sato et al., 2012 | [https://doi.org/10.1145/2207676.2207743](https://doi.org/10.1145/2207676.2207743)
   * our favorite for a long time
@@ -44,7 +44,6 @@ First step was to find a paper that suits the requirements. We had read a few pa
 
 PianoText: redesigning the piano keyboard for text entry | Feit et al., 2014 | [https://doi.org/10.1145/2598510.2598547](https://doi.org/10.1145/2598510.2598547)
 
-*insert short summary here*
 
 ## 2. Preparation
 
@@ -52,21 +51,22 @@ For replicating the interaction technique in the paper we needed a few things:
 
 Hardware:
 
-* Piano - we stole it from the media informatics lab (after intense hints about the piano we consulted the lecture material of Prof. Dr. Nikolaus Bosch 'Strafrecht Besonderer Teil II - Eigentums und Vermögensdelikte'. We realized that we only actualized 3 of the 4 'objektive Tatbestandsmerkmalen' by asking beforehand. Furthermore in the realm of 'subjektive Tatebestandsmerkmale' we found out that we never could steal it anyway because we intended to bring it back). We really wanted to have a "bad boys"-vibe to this.
+* Piano - we stole it from the media informatics lab (after intense hints about the piano we consulted the lecture material of Prof. Dr. Nikolaus Bosch 'Strafrecht Besonderer Teil II - Eigentums und Vermögensdelikte'. We realized that we only actualized 3 of the 4 'objektive Tatbestandsmerkmalen' by asking beforehand. Furthermore in the realm of 'subjektive Tatebestandsmerkmale' we found out that we never could steal it anyway, because we intended to bring it back). We really wanted to have a "bad boys"-vibe to this.
 * a second MIDI Controller - because village talk (more about that later)
 * Foot pedal - since the ~~stolen~~ borrowed piano didn't have one
 
-Software-related:
+Software:
 
-* mapping of MIDI-notes to the alphabet
-* a nice application
+* Algorithm to map letters and notes (implementation of the algorithm presented in the paper)
+* Implementation to generate keyboard input with a piano
+* Game application to train the piano input (similar to the application presented in the paper)
 
-### Hardware-Stuff
+### Hardware
 
-As mentioned we ~~stole~~ borrowed the piano from the media informatics lab. Nektar Impact GX 61:
+As mentioned we ~~stole~~ borrowed the piano from the media informatics lab. It is a Nektar Impact GX 61:
 
 * 61 Keys
-* Octave and transpose shifter (which is not cool, lowest note should be midi note 12 - do not change this)
+* Octave and transpose shifter (which is not cool, lowest note should be midi note 12 - already set up like this)
 * plug and play with USB
 
 Since we feared that the village talk about us was getting out of hand (and that Sabrinas grandma started again with "Christoph is such a cutie and you see him very often."), we decided to quickly assemble a miniature MIDI controller based on a Raspberry Pi Pico running on CircuitPython to do the first tests. You can see the code in the `assets/midi-controller`-folder. Things needed:
@@ -75,9 +75,9 @@ Since we feared that the village talk about us was getting out of hand (and that
 * 5 Buttons (or how many you want.)
 * 10 Jumpercables (just double the buttons number okay)
 
-In the paper it was mentioned that the space-bar was not mapped on the keys, but on the foot pedal of the piano. Our ~~stolen~~ borrowed keyboard does not have a foot pedal though, so we decided to assemble a pedal on our own. Like the test-midi-controller we build the pedal on a Raspberry Pi Pico running on (with? you know what I mean.) CircuitPython. We invested time, hard work and some tears to design, build and code the pedal box. All of this only for a space input.
+In the paper it was mentioned that the space-bar was not mapped on the keys, but on the foot pedal of the piano. Our ~~stolen~~ borrowed keyboard does not have a foot pedal though, so we decided to assemble a pedal on our own. Like the test-midi-controller we build the pedal on a Raspberry Pi Pico running with CircuitPython. We invested time, hard work and some tears to design, build and code the pedal box. All of this only for a space input.
 
-Things you need:
+Things required:
 
 * Raspberry Pi Pico
 * Button - preferably an Arcade-Button
@@ -109,13 +109,19 @@ After two iterations of printing, we decided to let it be and do the missing thi
 
 ### Software-Stuff
 
-#### Algorithm
+#### Algorithm (Algorithm folder)
 
-ToDo
+For the paper the authors implemented an algorithm to generate a mapping between letters and notes, to copy the scope of the paper we did this two. They used a dataset of text and a dataset of piano notes from sight-reading books. The link to the text dataset presented in the paper did no longer work, so we used the 'AUTHORS'-Folder from the 'Classic Literature in ASCII' dataset by Myles O'Neill (https://www.kaggle.com/datasets/mylesoneill/classic-literature-in-ascii?resource=download). The sight-reading dataset was generated by the authors for the paper and is not publicly available, other public piano datasets are not generated by sight-reading and therefore consist of many notes played at the same time, so they are not suitable for generating bi-grams of transitions.  We used the 'Melody' lines from the 'POP 909' dataset (from Wang, Z. et al. (2020). Pop909: A pop-song dataset for music arrangement generation. arXiv preprint arXiv:2008.07142. | https://github.com/music-x-lab/POP909-Dataset) as a proxy dataset for the proof of concept of the algorithm. These melody lines are good as a proxy dataset because there is only one note at a time like in sight reading. However, these melodies are intended to be performed by a singer, so the mapping is not the same as for a piano. Therefore in the actual implementation of the PianoText application we used the mappings presented in the paper.
 
-#### Game
+At first we had to read the midi and text files form the Datasets. With these datasets we generated uni- and bi-grams of the letters in the text and the notes in the midi files. With these uni and bi-grams we performed the algorithm described in the paper. In the algorithm we first mapped the n-frequent-letter with the n-frequent-note. For every new mapping we check for common letter bi-grams with the already mapped letters. If there is a common bi-gram we check if this a common note transition, if it is no common transition we reassign the letter to the n-1-frequent-note and do the check again. This way every letter is mapped to one note. In a second step we check the most common letter bi-grams for there mapping, if the mapping has a greater distance than 7-semi-tones we assign the more common letter one more time. For the new assignment we search for a not assigned note. We start the search next to the more infrequent letter on the opposite side of the already existing assignment to increase the distance between the same letters. After that we search alternating to minimize the distance between the two letters of the common bi-gram.
 
-The authors of the paper also implemented a application to learn and progress their input-technique with the piano. Out of time-issues we decided to do a little version of it with five (=5.00) levels.
+#### PianoText implementation (Midi-reader.py)
+
+Implementation that uses the midi output of a e-piano and generates keyboard inputs corresponding to the notes played. you can also type n-grams by playing accords. The mapping is the same as in the PianoText paper. At first you have to select your input device and if you want the sound of the notes played (the sound is created with pygame). After that you can use the piano as text input device. 
+
+#### Game (word-game.py)
+
+The authors of the paper also implemented a application to learn and progress their input-technique with the piano. The implementation consisted of 24 somewhat repetitive levels because it was implemented for several weeks training phase. We decided to do a little version of it with five (=5.00) levels showing the core features with less repetition.
 
 1. Level: learn the mapping of notes to letters
 2. Level: train the mapping of notes to letters
@@ -139,7 +145,7 @@ You don't have to play the game to make cool inputs with the ~~stolen~~ borrowed
 
 We also thought about cool stuff you could do with this. For example play normal music and see if there's a hidden meaning in the notes.
 
-Christoph played requiem of a dream theme and this is the output: atpnatpnatpnsata. Guess we accidentally summoned a demon.
+Christoph played requiem for a dream theme and this is the output: atpnatpnatpnsata. Guess we accidentally summoned a demon.
 Rosenrot: rrrrrrrrrwwwwwwwwwrrrrrrrrrwwwwwwcccrwhatwhatwhatecumwhatwhatwhatbyvvbywhatwhatacumwhatwhatwhatbywwbyccc (hell yeah.)
 
 You could also further extend the gamification application with learning by conditioning. Maybe buy a cheap EMS TENS device from China and for every wrong note, get a little bit of muscle stimulation. For entertanment purposes only.
