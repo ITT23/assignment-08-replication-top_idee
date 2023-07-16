@@ -28,12 +28,12 @@
 * [X] Keyboard klauen
 * [X] Mini-MIDI-Controller bauen, damit beide was machen können
 * [X] Mido-Stream ausprobieren
-* [ ] Noten auf Alphabet mappen
+* [X] Noten auf Alphabet mappen
 
   * [X] erste Versuche mit Hard-Code
   * [X] CSV-Datei / Text-Datei
-  * [ ] für später: Algorithmus
-* [ ] Akkorde auf Wörter mappen
+  * [X] für später: Algorithmus
+* [X] Akkorde auf Wörter mappen
 * [X] Fußpedal bauen -> Leertaste (was n Pain in the Ass.)
 * [X] Game bauen (sowas wie schnell kannst du den satz abschreiben)
 
@@ -48,9 +48,22 @@
 
   * [ ] Paper
   * [ ] Code
-  * [ ] 3D-Print-Shizzle
+  * [X] 3D-Print-Shizzle
 * [ ] voll fettes Video machen, weil wir Punkte brauchen <3
 
   * [ ] Intro: GZSZ
   * [ ] VLog-Style
   * [ ] Ende: no Humans were harmed in the making of this video withouth their consens
+
+
+
+---
+
+Video startet: Ding dong - KLINGELSTREICH!! WIR KLAUEN JETZT DAS KLAVIER
+
+
+startet: schlechtes piano spielen - bing -> whatsapp -> tastatur -> piano -> bing -> tastatur -> meeeeeh, tadaaa -> PIANO INPUT!!
+
+Prototyp gedöns
+
+80s flash GAMIFICATION <3
