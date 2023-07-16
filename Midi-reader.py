@@ -43,8 +43,10 @@ def main():
                             keyboard.press(Key.backspace)
                             keyboard.release(Key.backspace)
                         for char in word:
+                            print('test')
                             keyboard.press(char)
                             keyboard.release(char)
+                            time.sleep(0.05)
                         last_input_accord = True
                         continue
                 keyboard.press(notes[msg.note - FIRST_E_PIANO_NOTE])
@@ -108,11 +110,7 @@ def accord_exists():
         for j in range(len(current_notes)):
             if(i == j):
                 continue
-            print(current_notes[i][1] - current_notes[j][1])
-            print(current_notes[i][1] - current_notes[j][1] < 0.1)
-            print(current_notes[i][1] - current_notes[j][1] > -0.1)
             if((0.1 > current_notes[i][1] - current_notes[j][1]) and (-0.1 < current_notes[i][1] - current_notes[j][1])):
-                print('test')
                 accord_time = True
                 break
     return accord_time
