@@ -15,6 +15,7 @@ COLOR_RED = (237, 175, 184, 255)
 #COLOR_GREEN_LIGHT = (159, 204, 46, 255)
 COLOR_GREEN = (68, 118, 4, 255)
 
+# helper functions and helping things every level uses
 class GameManger:
     def __init__(self) -> None:
         self.mode = 0
@@ -22,6 +23,7 @@ class GameManger:
                                                   width= WINDOW_WIDTH,
                                                   height= WINDOW_HEIGHT,
                                                   color = COLOR_WHITE)
+        # the text you should write
         self.label = pyglet.text.Label(text="",
                                        font_name="Arial",
                                        font_size=20,
@@ -29,6 +31,7 @@ class GameManger:
                                        x = WINDOW_WIDTH // 2,
                                        y = WINDOW_HEIGHT // 2 - 40,
                                        anchor_x='center')
+        # text you do write
         self.input_text = pyglet.text.Label(text="",
                                        font_name="Arial",
                                        font_size=20,
@@ -58,11 +61,13 @@ class GameManger:
                 images.append((letter, complete_path))
         return images
 
+    # gets the path of the image for the letter chosen
     def _get_image_to_show(self, letter, images):
         for mapped_letter in images: #self.images
             if mapped_letter[0] == letter:
                 return mapped_letter[1]
             
+    # reads text file for the text you should write
     def _read_file(self, path):
         saved_words = []
         with open(path, "r") as words:
@@ -76,7 +81,10 @@ class GameManger:
         self.input_text.draw()
         self.score_text.draw()
             
-    # return True, Ture -> right, maximum word right
+    # returns tuple of booleans for game status
+    # True, True = current input is right, word is completed
+    # True, False = current input is right, word is not completed
+    # False, False = input wrong
     def _check_input(self): 
         input_length = len(self.input_text.text)
         if input_length == len(self.label.text):
@@ -85,12 +93,10 @@ class GameManger:
             #self.score += 50
             if self.input_text.text == self.label.text[:input_length]:
                 self.score += 50
-                self.score_text.color = COLOR_GREEN
                 return (True, True)
         if self.input_text.text == self.label.text[:input_length]:
             #self.score += 10
-            self.score += 1
-            self.score_text.color = COLOR_GREEN
+            self.score += 5
             return (True, False)
         else:
             self.score -= 5
@@ -102,6 +108,7 @@ class GameManger:
         self.score_text.color = COLOR_BLACK
     
 
+# first level with mapping pictures of notes and text
 class Level_One:
     def __init__(self, game_mngr) -> None:
         self.game_mngr = game_mngr
@@ -112,7 +119,7 @@ class Level_One:
         self.image_to_show = None
         self._get_new_text()
          
-        
+    # randomly chooses a new letter from the alphabet   
     def _get_new_text(self):
         self.text_to_show = random.choice(self.input_list)
         self.game_mngr.label.text = self.text_to_show
@@ -122,7 +129,8 @@ class Level_One:
         self.image_to_show.blit(25,200)
 
 
-
+# test the knowledge
+# no pictures shown, just what you should type with the keyboard
 class Level_Two:
     def __init__(self, game_mngr) -> None:
         self.game_mngr = game_mngr
@@ -137,6 +145,8 @@ class Level_Two:
     def _draw(self):
         pass
 
+# type words
+# no pictures shown, just words to complete
 class Level_Three: 
     def __init__(self, game_mngr) -> None:
         self.game_mngr = game_mngr
@@ -151,7 +161,8 @@ class Level_Three:
         pass
 
 
-
+# type more than a word
+# no pictures shown, just words to complete
 class Level_Four:
     def __init__(self, game_mngr) -> None:
         self.game_mngr = game_mngr
@@ -165,7 +176,8 @@ class Level_Four:
     def _draw(self):
         pass
 
-
+# train the chords
+# pictures of chords are shown
 class Level_Five:
     def __init__(self, game_mngr) -> None:
         self.game_mngr = game_mngr
@@ -186,22 +198,24 @@ class Level_Five:
         self.image_to_show.blit(25,200)
 
 
-
+# start menu
 class Menu():
 
     def __init__(self, game_mngr):
-        self.menu_visible = True
+        self.menu_visible = True 
         self.color_unselected = COLOR_GREY
         self.color_selected = COLOR_GREEN
         self.menu_item_width = 250
         self.menu_item_height = 50
         self.x_pos = WINDOW_WIDTH // 2 - self.menu_item_width // 2
+        # boxes for levels
         self.menu_items = [pyglet.shapes.Rectangle(x=self.x_pos, y=280, width=self.menu_item_width, height=self.menu_item_height, color=self.color_selected),
                            pyglet.shapes.Rectangle(x=self.x_pos, y=220, width=self.menu_item_width, height=self.menu_item_height, color=self.color_unselected),
                            pyglet.shapes.Rectangle(x=self.x_pos, y=160, width=self.menu_item_width, height=self.menu_item_height, color=self.color_unselected),
                            pyglet.shapes.Rectangle(x=self.x_pos, y=100, width=self.menu_item_width, height=self.menu_item_height, color=self.color_unselected),
                            pyglet.shapes.Rectangle(x=self.x_pos, y=40, width=self.menu_item_width, height=self.menu_item_height, color=self.color_unselected)
                            ]
+        # label for levels
         self.menu_labels = [pyglet.text.Label(text="Train mapping", font_name="Arial", font_size=20, color= COLOR_WHITE, x = WINDOW_WIDTH // 2, y = 295, anchor_x='center'),
                             pyglet.text.Label(text="Exercise mapping", font_name="Arial", font_size=20, color= COLOR_WHITE, x = WINDOW_WIDTH // 2, y = 235, anchor_x='center'),
                             pyglet.text.Label(text="Write words", font_name="Arial", font_size=20, color= COLOR_WHITE, x = WINDOW_WIDTH // 2, y = 175, anchor_x='center'),
@@ -233,8 +247,6 @@ class Menu():
             self.selected_item += direction 
             self.reset_colors()
             self.menu_items[self.selected_item].color = self.color_selected
-            #game_mngr.mode = self.selected_item
-
 
 
 window = pyglet.window.Window(WINDOW_WIDTH, WINDOW_HEIGHT)
@@ -252,22 +264,17 @@ levels = [lvl_one,lvl_two, lvl_three, lvl_four, lvl_five]
 
 @window.event
 def on_text(text):
+    # text input should only be important if a level is loaded
     if not menu.menu_visible:
         game_mngr.input_text.text += text.upper()
         current_state_correct, word_correct = game_mngr._check_input()
         if current_state_correct and not word_correct:
-            # bist aufm richtigen weg schnuggi
-            pass
+            game_mngr.score_text.color = COLOR_GREEN
         elif current_state_correct and word_correct:
-            # new word bitch
             game_mngr.input_text.text = ""
-            # array abfrage was menu grad fürn modus hat (im game_mngr?)
             levels[game_mngr.mode]._get_new_text()
-            #lvl_one._get_new_text()
-        else:
-            #print(game_mngr.input_text.text)
+        else: # wrong input deletes the input
             game_mngr.input_text.text = ""
-            pass
 
 @window.event
 def on_key_press(symbol, modifier): 
@@ -277,7 +284,7 @@ def on_key_press(symbol, modifier):
         elif symbol == pyglet.window.key.DOWN:
             menu.update_menu(1) # downwards direction
     if game_mngr.mode == 4:
-        time.sleep(0.2)
+        time.sleep(0.2) # to update the chord progression
 
 @window.event
 def on_key_release(symbol, modifier):         
