@@ -8,4 +8,9 @@
 Mapping:
 ![mapping](./assets/game/mapping_.jpg)
 
-The escape key is also implemented on the highest Note on the piano we had (MIDI note 72)
+Furthermore we extended the mapping with:
+
+1. `BACKSPACE` key = MIDI-note 71
+2. `ENTER` key = MIDI-note 72
+
+If you want to see the algorithm mentioned in the paper, check out the `algorithm`-folder!
