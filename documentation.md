@@ -46,7 +46,9 @@ PianoText: redesigning the piano keyboard for text entry | Feit et al., 2014 | [
 
 *insert short summary here*
 
-## 2. PreparationFor replicating the interaction technique in the paper we needed a few things:
+## 2. Preparation
+
+For replicating the interaction technique in the paper we needed a few things:
 
 Hardware:
 
@@ -125,7 +127,7 @@ For the first and fith level we also did some very beautiful pictures, that show
 
 ![mapping example](./assets/docu/mapping_example.jpg)
 
-Also there is a score-system for each level, where every correct key input gets you points and every correct word/sentence gives you even more points. If you type something wrong you will get - you guessed it - negative points. All this stuff was mostly done while being at a wedding (as a guest and photograph). That's what we do for this course: nothing can stop us working on this project. Powered by beer and Aperol Spritz (is this advertisment? Sorry). For documentation purposes look at this big brain situation (nothing worked at this moment):
+Also there is a score-system for each level, where every correct key input gets you points and every correct word/sentence gives you even more points. If you type something wrong you will get - you guessed it - negative points. All this stuff was mostly done while being at a wedding (as a guest and photograph). That's what we do for this course: nothing can stop us working on this project. Powered by beer and Aperol Spritz (is this advertisment? Sorry). For documentation purposes look at this big brain situation (nothing worked at this moment - eye bags for dramatic purpose):
 
 ![mapping example](./assets/docu/wedding-coding.jpg)
 
