@@ -13,10 +13,11 @@ current_notes = []
 FIRST_E_PIANO_NOTE = 12
 BACKSPACE_NOTE = 73
 PIANO_NOTES = ['C', '#C', 'D', '#D', 'E', 'F', '#F', 'G', '#G', 'A', '#A', 'B']
+last_word = ''
 
 # accorde should only be playble in the octive
 def main():
-    global current_notes
+    global current_notes, last_word
     last_input_accord = False
     read_accords()
     read_notes()
@@ -45,10 +46,16 @@ def main():
                         if not last_input_accord:
                             keyboard.press(Key.backspace)
                             keyboard.release(Key.backspace)
+                        if(check_accord_three_notes()):
+                            for char in last_word:
+                                keyboard.press(Key.backspace)
+                                keyboard.release(Key.backspace)
+                                time.sleep(0.05)
                         for char in word:
                             keyboard.press(char)
                             keyboard.release(char)
                             time.sleep(0.05)
+                        last_word = word
                         last_input_accord = True
                         continue
                 keyboard.press(notes[msg.note - FIRST_E_PIANO_NOTE])
@@ -117,6 +124,19 @@ def accord_exists():
                 break
     return accord_time
 
+
+def check_accord_three_notes():
+    accord_notes = []
+    last_note = current_notes[-1]
+    for note in current_notes:
+        if(last_note == note):
+            continue
+        if(last_note[1] - note[1]):
+            accord_notes.append(note[0])
+    accord_notes.append(last_note[0])
+    if(len(accord_notes) > 2):
+        return True
+    return False
 
 
 main()
