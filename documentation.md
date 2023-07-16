@@ -162,7 +162,7 @@ Since this is the last assignment of this wonderful course, we wanted to end it 
 
 [https://youtu.be/UFoDPeqXcZY](https://youtu.be/UFoDPeqXcZY)
 
-[![best video](https://youtu.be/UFoDPeqXcZY)]
+[![best video](https://img.youtube.com/vi/UFoDPeqXcZY/default.jpg)](https://youtu.be/UFoDPeqXcZY)
 
 ### Other fun stuff
 
