@@ -11,6 +11,7 @@ current_notes = []
 
 
 FIRST_E_PIANO_NOTE = 12
+BACKSPACE_NOTE = 73
 PIANO_NOTES = ['C', '#C', 'D', '#D', 'E', 'F', '#F', 'G', '#G', 'A', '#A', 'B']
 
 # accorde should only be playble in the octive
@@ -28,7 +29,9 @@ def main():
     with mido.open_input() as inport:
         for msg in inport:
             if(msg.type == 'note_on'):
-                
+                if(msg.note == BACKSPACE_NOTE):
+                    keyboard.press(Key.backspace)
+                    keyboard.release(Key.backspace)
                 midi_out.note_on(msg.note, msg.velocity)
                 #?
                 if(msg.note - FIRST_E_PIANO_NOTE >= len(notes)):
@@ -43,7 +46,6 @@ def main():
                             keyboard.press(Key.backspace)
                             keyboard.release(Key.backspace)
                         for char in word:
-                            print('test')
                             keyboard.press(char)
                             keyboard.release(char)
                             time.sleep(0.05)
