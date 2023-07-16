@@ -1,5 +1,11 @@
 # Documentation
 
+**Team Top-Idee: Christoph Wührl & Sabrina Hößl**
+
+*or like in FlexNow lists: Christoph W?hrl & Sabrina H??l*
+
+![mapping example](./assets/docu/hotties.jpg)
+
 ## 1. Paper-Stuff
 
 First step was to find a paper that suits the requirements. We had read a few papers we found interesting:
@@ -28,10 +34,11 @@ First step was to find a paper that suits the requirements. We had read a few pa
   * our favorite for a long time
   * Reasons against it:
     * hardware - no idea what sensors we needed + where to get them in the short time
+    * plus we know our luck with sensors. The more we implement, the more will go wrong
 * An Intuitive Tangible Game Controller
   * Foottit et al., 2014 | [https://doi.org/10.1145/2677758.2677774](https://doi.org/10.1145/2677758.2677774)
   * Reasons against it:
-    * hardware - lot of sensors (all available, but the more sensors we have to put together the more could get wrong)
+    * hardware - lot of sensors (same as before: sensors and team top-idee would go wrong just because it's us)
 
 **Our decision**:
 
@@ -39,9 +46,7 @@ PianoText: redesigning the piano keyboard for text entry | Feit et al., 2014 | [
 
 *insert short summary here*
 
-## 2. Preparation
-
-For replicating the interaction technique in the paper we needed a few things:
+## 2. PreparationFor replicating the interaction technique in the paper we needed a few things:
 
 Hardware:
 
@@ -56,15 +61,19 @@ Software-related:
 
 ### Hardware-Stuff
 
-As mentioned we ~~stole~~ borrowed the piano from the media informatics lab. (Nektar Impact GX 61 - some specifications here).
+As mentioned we ~~stole~~ borrowed the piano from the media informatics lab. Nektar Impact GX 61:
 
-Since we feared that the village talk about us was getting out of hand (and that Sabrinas grandma started again with "Christoph is such a cutie and you see him very often."), we decided to quickly assemble a miniature MIDI controller based on a Raspberry Pi Pico running on CircuitPython. You can see the code in the `assets/midi-controller`-folder. Things needed:
+* 61 Keys
+* Octave and transpose shifter (which is not cool, lowest note should be midi note 12 - do not change this)
+* plug and play with USB
+
+Since we feared that the village talk about us was getting out of hand (and that Sabrinas grandma started again with "Christoph is such a cutie and you see him very often."), we decided to quickly assemble a miniature MIDI controller based on a Raspberry Pi Pico running on CircuitPython to do the first tests. You can see the code in the `assets/midi-controller`-folder. Things needed:
 
 * Raspberry Pi Pico
 * 5 Buttons (or how many you want.)
 * 10 Jumpercables (just double the buttons number okay)
 
-In the paper it was mentioned that the space-bar was not mapped on the keys, but on the foot pedal of the piano. Our ~~stolen~~ borrowed keyboard didn't had a foot pedal though, so we decided to assemble a pedal on our own. Like the test-midi-controller we build the pedal on a Raspberry Pi Pico running on (with? you know what I mean.) CircuitPython. We invested time and hard work to design, build and code the pedal box. All of this only for a space input.
+In the paper it was mentioned that the space-bar was not mapped on the keys, but on the foot pedal of the piano. Our ~~stolen~~ borrowed keyboard does not have a foot pedal though, so we decided to assemble a pedal on our own. Like the test-midi-controller we build the pedal on a Raspberry Pi Pico running on (with? you know what I mean.) CircuitPython. We invested time, hard work and some tears to design, build and code the pedal box. All of this only for a space input.
 
 Things you need:
 
@@ -104,7 +113,7 @@ ToDo
 
 #### Game
 
-The authors of the paper also implemented a application to learn and progress their input-technique with the piano. Out of time-issues we decided to do a little version of it with five (=5.00) levels. 
+The authors of the paper also implemented a application to learn and progress their input-technique with the piano. Out of time-issues we decided to do a little version of it with five (=5.00) levels.
 
 1. Level: learn the mapping of notes to letters
 2. Level: train the mapping of notes to letters
@@ -112,14 +121,29 @@ The authors of the paper also implemented a application to learn and progress th
 4. Level: write sentences (or at least more than one word to finally use the damn foot pedal)
 5. Level: learn the mapping of chords to words (or part of words)
 
-For the first and fith level we also did some very beautiful pictures, that show the notes that should be played (made with figma and tears). Also there is a (pseudo-)score-system for each level, where every correct kex input gets you points and every correct word/sentence gives you even more points. If you type something wrong you will get - you guessed it - negative points. All this stuff was mostly done while being at a wedding (as a guest and photograph). That's what we do for this course: nothing can stop us working on this project.
+For the first and fith level we also did some very beautiful pictures, that show the notes that should be played (made with figma and tears). The mapping from the paper was online, but it was all with notes on staves, which Sabrina absolutely can't read fast enough. Therefore we decided to implement the mapping not only for musical talents, but for everyone. The mapping now shows (part of) a keyboard with the notes to be pressed marked as red. For the chords this system is also implemented, with the information, that the notes should be quickly played in ascending order (from left to right).
+
+![mapping example](./assets/docu/mapping_example.jpg)
+
+Also there is a score-system for each level, where every correct key input gets you points and every correct word/sentence gives you even more points. If you type something wrong you will get - you guessed it - negative points. All this stuff was mostly done while being at a wedding (as a guest and photograph). That's what we do for this course: nothing can stop us working on this project. Powered by beer and Aperol Spritz (is this advertisment? Sorry). For documentation purposes look at this big brain situation (nothing worked at this moment):
+
+![mapping example](./assets/docu/wedding-coding.jpg)
 
 #### General
 
-You don't have to play the game to make cool inputs with the ~~stolen~~ borrowed piano. As soon as you run the `Midi-reader.py` you can just write your next paper with it (but please co-author us, and also don't yell at us for weird time issues).
+You don't have to play the game to make cool inputs with the ~~stolen~~ borrowed piano. As soon as you run the `Midi-reader.py` you can just write your next paper with it.
 
-ToDo:
+## 3. Fun-Stuff
 
-- mido
-- pyaudio
-- game
+We also thought about cool stuff you could do with this. For example play normal music and see if there's a hidden meaning in the notes.
+
+Christoph played requiem of a dream theme and this is the output: atpnatpnatpnsata. Guess we accidentally summoned a demon.
+Rosenrot: rrrrrrrrrwwwwwwwwwrrrrrrrrrwwwwwwcccrwhatwhatwhatecumwhatwhatwhatbyvvbywhatwhatacumwhatwhatwhatbywwbyccc (hell yeah.)
+
+You could also further extend the gamification application with learning by conditioning. Maybe buy a cheap EMS TENS device from China and for every wrong note, get a little bit of muscle stimulation. For entertaining purposes only.
+
+atpnapeubyatpnatpnaabybyapuauauhaotherwhat
+
+whatwhatwhatacucwhatwhatwhatbywwbyllrrrrrrrrrwwwwwwwwwrrrrrrrrrwwwwwwccccccccccccc
+
+urrrrrrrrrwwwwwwwwwrrrrrrrrrwwwwwwcccrwhatwhatwhatecumwhatwhatwhatbyvvbywhatwhatacumwhatwhatwhatbywwbyccc
