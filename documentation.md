@@ -142,10 +142,4 @@ We also thought about cool stuff you could do with this. For example play normal
 Christoph played requiem of a dream theme and this is the output: atpnatpnatpnsata. Guess we accidentally summoned a demon.
 Rosenrot: rrrrrrrrrwwwwwwwwwrrrrrrrrrwwwwwwcccrwhatwhatwhatecumwhatwhatwhatbyvvbywhatwhatacumwhatwhatwhatbywwbyccc (hell yeah.)
 
-You could also further extend the gamification application with learning by conditioning. Maybe buy a cheap EMS TENS device from China and for every wrong note, get a little bit of muscle stimulation. For entertaining purposes only.
-
-atpnapeubyatpnatpnaabybyapuauauhaotherwhat
-
-whatwhatwhatacucwhatwhatwhatbywwbyllrrrrrrrrrwwwwwwwwwrrrrrrrrrwwwwwwccccccccccccc
-
-urrrrrrrrrwwwwwwwwwrrrrrrrrrwwwwwwcccrwhatwhatwhatecumwhatwhatwhatbyvvbywhatwhatacumwhatwhatwhatbywwbyccc
+You could also further extend the gamification application with learning by conditioning. Maybe buy a cheap EMS TENS device from China and for every wrong note, get a little bit of muscle stimulation. For entertanment purposes only.
