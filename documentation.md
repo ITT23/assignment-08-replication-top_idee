@@ -117,7 +117,7 @@ At first we had to read the midi and text files form the Datasets. With these da
 
 #### PianoText implementation (Midi-reader.py)
 
-Implementation that uses the midi output of a e-piano and generates keyboard inputs corresponding to the notes played. you can also type n-grams by playing accords. The mapping is the same as in the PianoText paper. At first you have to select your input device and if you want the sound of the notes played (the sound is created with pygame). After that you can use the piano as text input device. 
+Implementation that uses the midi output of a e-piano and generates keyboard inputs corresponding to the notes played. you can also type n-grams by playing accords. The mapping is the same as in the PianoText paper. At first you have to select your input device and if you want the sound of the notes played (the sound is created with pygame). After that you can use the piano as text input device. For the accord entry we decided that it should only count as accord if the related notes are played in proximity of time with each other. The time window for this is 0.1 seconds but you can changes this by updating the constant in the Midi-reader.py.
 
 #### Game (word-game.py)
 
