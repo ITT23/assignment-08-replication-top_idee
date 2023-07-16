@@ -140,6 +140,12 @@ For the first and fith level we also did some very beautiful pictures, that show
 
 ![game mapping](./assets/docu/game_example.jpg)
 
+For the third and forth level you will have to write words or sentences without the mapping picture (but you can always look it up in the `assets/game-folder`, in the `README` or here in the documentation). We found 100 words that are somehow connected to this course and will get randomly chosen, also 72 sentences (or at least more than one word) that are somehow connected to Human-Computer-Interaction. You can see them in the `assets/game`-folder as `words.txt` and `sentences.txt`.
+
+Note that you are not supposed to play chords in the earlier levels to train your mapping-knowledge.
+
+If you did start a level and want to change it, you can always go back to the menu with the `BACKSPACE`-key
+
 Also there is a score-system for each level, where every correct key input gets you points and every correct word/sentence gives you even more points. If you type something wrong you will get - you guessed it - negative points. All this stuff was mostly done while being at a wedding (as a guest and photograph). That's what we do for this course: nothing can stop us working on this project. Powered by beer and Aperol Spritz (is this advertisment? Sorry). For documentation purposes look at this big brain situation (nothing worked at this moment - eye bags for dramatic purpose):
 
 ![hard work](./assets/docu/wedding-coding.jpg)

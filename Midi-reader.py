@@ -49,7 +49,6 @@ def main(input_device, use_sound):
                 # plays the note
                 if(use_sound):
                     midi_out.note_on(msg.note, msg.velocity)
-                #?
                 if(msg.note - FIRST_E_PIANO_NOTE >= len(notes)):
                     continue
                 # gets the current note and maps it to the key presses

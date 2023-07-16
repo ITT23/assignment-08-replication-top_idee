@@ -285,6 +285,9 @@ def on_key_press(symbol, modifier):
             menu.update_menu(1) # downwards direction
     if game_mngr.mode == 4:
         time.sleep(0.2) # to update the chord progression
+    if not menu.menu_visible: # to get back to the menu
+        if symbol == pyglet.window.key.BACKSPACE:
+            menu.menu_visible = True
 
 @window.event
 def on_key_release(symbol, modifier):         

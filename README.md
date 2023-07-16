@@ -4,6 +4,9 @@
 2. Plug in the foot pedal (it's the space bar)
 3. start `Midi-reader.py` and select the MIDI input of your choice
 4. have fun (you can start `word-game.py` if you want or just start playing / typing)
+   1. You can select the level you want to play with the `ARROW`-keys
+   2. Start the level with `SPACE`-key
+   3. Go back to menu with `BACKSPACE`-key
 
 Mapping:
 ![mapping](./assets/game/mapping_.jpg)
