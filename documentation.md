@@ -156,6 +156,16 @@ You don't have to play the game to make cool inputs with the ~~stolen~~ borrowed
 
 ## 3. Fun-Stuff
 
+### Assignment related
+
+Since this is the last assignment of this wonderful course, we wanted to end it with a big bang. This documentation is full of love, but it's not enoug. So we decided to make the best video ever. We put a lot of effort in, did the stuff we know. The music was chosen in a long process. Just watch it here:
+
+[https://youtu.be/UFoDPeqXcZY](https://youtu.be/UFoDPeqXcZY)
+
+[![best video](https://youtu.be/UFoDPeqXcZY)]
+
+### Other fun stuff
+
 We also thought about cool stuff you could do with this. For example play normal music and see if there's a hidden meaning in the notes.
 
 Christoph played requiem for a dream theme and this is the output: atpnatpnatpnsata. Guess we accidentally summoned a demon.
