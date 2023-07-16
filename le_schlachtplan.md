@@ -35,15 +35,15 @@
   * [ ] für später: Algorithmus
 * [ ] Akkorde auf Wörter mappen
 * [X] Fußpedal bauen -> Leertaste (was n Pain in the Ass.)
-* [ ] Game bauen (sowas wie schnell kannst du den satz abschreiben)
+* [X] Game bauen (sowas wie schnell kannst du den satz abschreiben)
 
   * [X] erste Funktion (Input  == Satz)
-  * [ ] Satz-Liste
-  * [ ] Leveldesign
-    * [ ] 1: einzelne Buchstaben
-    * [ ] 2: Wörter/Sätze nachtippen
-    * [ ] 3: Akkorder lernen
-    * [ ] 4: Free falling
+  * [X] Satz-Liste
+  * [X] Leveldesign
+    * [X] 1: einzelne Buchstaben
+    * [X] 2: Wörter/Sätze nachtippen
+    * [X] 3: Akkorder lernen
+    * [X] 4: Free falling
 * [ ] Dokumentation
 
   * [ ] Paper
