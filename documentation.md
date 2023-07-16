@@ -45,27 +45,26 @@ For replicating the interaction technique in the paper we needed a few things:
 
 Hardware:
 
-* Piano - we stole it from the media informatics lab (after intense hints about the piano we consulted the lecture material of Prof. Dr. Nikolaus Bosch 'Strafrecht Besonderer Teil II - Eigentums und Vermögensdelikte'. We realized that we only actualized 3 of the 4 'objektive Tatbestandsmerkmalen' by asking beforehand. Furthermore in the realm of 'subjektive Tatebestandsmerkmale' we found out that we never could steal it anyway because we intended to bring it back)
-* a second MIDI Controller - because Christoph and Sabrina are seeing each other too often, the village is already talking about them; two controllers = everyone can work on MIDI input on their own
-* Foot pedal - since the stolen piano didn't have one
+* Piano - we stole it from the media informatics lab (after intense hints about the piano we consulted the lecture material of Prof. Dr. Nikolaus Bosch 'Strafrecht Besonderer Teil II - Eigentums und Vermögensdelikte'. We realized that we only actualized 3 of the 4 'objektive Tatbestandsmerkmalen' by asking beforehand. Furthermore in the realm of 'subjektive Tatebestandsmerkmale' we found out that we never could steal it anyway because we intended to bring it back). We really wanted to have a "bad boys"-vibe to this.
+* a second MIDI Controller - because village talk (more about that later)
+* Foot pedal - since the ~~stolen~~ borrowed piano didn't have one
 
 Software-related:
 
-* MIDI - knowledge
 * mapping of MIDI-notes to the alphabet
 * a nice application
 
 ### Hardware-Stuff
 
-As mentioned we stole the piano from the media informatics lab. (Nektar Impact GX 61 - some specifications here).
+As mentioned we ~~stole~~ borrowed the piano from the media informatics lab. (Nektar Impact GX 61 - some specifications here).
 
-Since we feared that the village talk was getting out of hand, we decided to quickly assemble a miniature MIDI controller based on a Raspberry Pi Pico running on CircuitPython. You can see the code in the `assets/midi-controller`-folder. Things needed:
+Since we feared that the village talk about us was getting out of hand (and that Sabrinas grandma started again with "Christoph is such a cutie and you see him very often."), we decided to quickly assemble a miniature MIDI controller based on a Raspberry Pi Pico running on CircuitPython. You can see the code in the `assets/midi-controller`-folder. Things needed:
 
 * Raspberry Pi Pico
-* 5 Buttons
-* 10 Jumpercables
+* 5 Buttons (or how many you want.)
+* 10 Jumpercables (just double the buttons number okay)
 
-In the paper it was mentioned that the space-bar was not mapped on the keys, but on the foot pedal of the piano. Our stolen keyboard didn't had a foot pedal though, so we decided to assemble a pedal on our own. Like the test-midi-controller we build the pedal on a Raspberry Pi Pico running with? CircuitPython. We invested time and hard work to design, build and code the pedal box only for a space input.
+In the paper it was mentioned that the space-bar was not mapped on the keys, but on the foot pedal of the piano. Our ~~stolen~~ borrowed keyboard didn't had a foot pedal though, so we decided to assemble a pedal on our own. Like the test-midi-controller we build the pedal on a Raspberry Pi Pico running on (with? you know what I mean.) CircuitPython. We invested time and hard work to design, build and code the pedal box. All of this only for a space input.
 
 Things you need:
 
@@ -83,21 +82,41 @@ Things you need:
 
 #### Design
 
-The Pedal was designed in Blender with focus on easy assembly. The top has a slope to mimic a foot pedal and a hole to put in a Aracade-Button with 30mm diameter. On the bottom holes were included to secure a Raspberry Pi Pico and two flaps were designed to screw the bottom and top together.
+The Pedal was designed in Blender with focus on easy assembly. The top has a slope to mimic a foot pedal and a hole to put in a Aracade-Button with 30mm diameter. On the bottom holes were included to secure a Raspberry Pi Pico and two flaps were designed to screw the bottom and top together. Now take a look at this beautiful animation:
 
 ![blender design](./assets/docu/pedal_blender.gif)
 
 #### Code
 
-On the Pico we imported the `adafruit-midi`-library to have a MIDI-output. Through the button press the MIDI-note 0 will get played/streamed, since this note is not likely to be played on normal pianos. The code can be seen in the `pico-pedal.py`-file in the `assets/pedal`-folder. The library used is also linked. For the button input we chose the GPIO-Pin-6.
+On the Pico we imported the `adafruit-hid`-library to mimic keyboard input. Through the button press a space input will be sent. The code can be seen in the `pico-pedal.py` file in the `assets/pedal`-folder. Beforehand (see `pico-pedal-midi.py`) we implemented the button with the `adafruit-midi`-library and the press sent the midi note 0. Both code files are on the Pico (and in the folder), you can switch it up if you want. But we recommend the keyboard mimic thing.
 
 #### Assembly
 
-After two iterations of printing, we decided to let it be and do the missing things (place for nuts to be hold) with hot glue instead. Like in the code mentioned one button pin is soldered to the GPIO-pin-6 of the Pico and the other one to the 3.3V out (Pin 36). The Pico is then screwed on to the bottom with four M2 screws and nuts and the button is firmly placed in the top-hole. We then put glue on the inside of the button to prevent jiggly pressed and also glued on the M3 nuts onto the inside of the screw flaps of the bottom part. Bottom and top part were then put together and secured with the M3 screws.
+After two iterations of printing, we decided to let it be and do the missing things (place for nuts to be hold) with hot glue instead. Like in the code mentioned one button pin is soldered to the GPIO-pin-6 of the Pico and the other one to the 3.3V out (Pin 36). The Pico is then screwed on to the bottom with four M2 screws and ~~deez~~ nuts and the button is firmly placed in the top-hole. We then put glue on the inside of the button to prevent jiggly presses and also glued on the M3 nuts onto the inside of the screw flaps of the bottom part. Bottom and top part were then put together and secured with the M3 screws.
 
 ![assembly](./assets/docu/assembly.jpg)
 
 ### Software-Stuff
+
+#### Algorithm
+
+ToDo
+
+#### Game
+
+The authors of the paper also implemented a application to learn and progress their input-technique with the piano. Out of time-issues we decided to do a little version of it with five (=5.00) levels. 
+
+1. Level: learn the mapping of notes to letters
+2. Level: train the mapping of notes to letters
+3. Level: write words with your knowledge
+4. Level: write sentences (or at least more than one word to finally use the damn foot pedal)
+5. Level: learn the mapping of chords to words (or part of words)
+
+For the first and fith level we also did some very beautiful pictures, that show the notes that should be played (made with figma and tears). Also there is a (pseudo-)score-system for each level, where every correct kex input gets you points and every correct word/sentence gives you even more points. If you type something wrong you will get - you guessed it - negative points. All this stuff was mostly done while being at a wedding (as a guest and photograph). That's what we do for this course: nothing can stop us working on this project.
+
+#### General
+
+You don't have to play the game to make cool inputs with the ~~stolen~~ borrowed piano. As soon as you run the `Midi-reader.py` you can just write your next paper with it (but please co-author us, and also don't yell at us for weird time issues).
 
 ToDo:
 

@@ -3,6 +3,7 @@ import sys
 import os
 import string
 import random
+import time
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 400
@@ -188,7 +189,7 @@ class Level_Five:
 
 class Menu():
 
-    def __init__(self):
+    def __init__(self, game_mngr):
         self.menu_visible = True
         self.color_unselected = COLOR_GREY
         self.color_selected = COLOR_GREEN
@@ -232,12 +233,14 @@ class Menu():
             self.selected_item += direction 
             self.reset_colors()
             self.menu_items[self.selected_item].color = self.color_selected
+            #game_mngr.mode = self.selected_item
 
 
 
 window = pyglet.window.Window(WINDOW_WIDTH, WINDOW_HEIGHT)
-menu = Menu()
+
 game_mngr = GameManger()
+menu = Menu(game_mngr)
 lvl_one = Level_One(game_mngr)
 lvl_two = Level_Two(game_mngr)
 lvl_three = Level_Three(game_mngr)
@@ -267,11 +270,14 @@ def on_text(text):
             pass
 
 @window.event
-def on_key_press(symbol, modifier):         
-    if symbol == pyglet.window.key.UP:
-        menu.update_menu(-1) # upwards direction
-    elif symbol == pyglet.window.key.DOWN:
-        menu.update_menu(1) # downwards direction
+def on_key_press(symbol, modifier): 
+    if menu.menu_visible:       
+        if symbol == pyglet.window.key.UP:
+            menu.update_menu(-1) # upwards direction
+        elif symbol == pyglet.window.key.DOWN:
+            menu.update_menu(1) # downwards direction
+    if game_mngr.mode == 4:
+        time.sleep(0.2)
 
 @window.event
 def on_key_release(symbol, modifier):         

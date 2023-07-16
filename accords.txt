@@ -55,3 +55,8 @@ her #A F
 just B #F
 good E G C
 many A D
+as #F C
+es D #F
+st A #D
+ng #G C
+te A #C

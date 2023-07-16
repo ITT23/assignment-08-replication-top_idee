@@ -2,6 +2,7 @@ import mido
 from pynput.keyboard import Controller, Key
 import pygame.midi
 import time
+import sys
 
 keyboard = Controller()
 
@@ -9,9 +10,10 @@ notes = []
 accords = []
 current_notes = []
 
+selected_device = None
 
 FIRST_E_PIANO_NOTE = 12
-BACKSPACE_NOTE = 73
+BACKSPACE_NOTE = 72
 PIANO_NOTES = ['C', '#C', 'D', '#D', 'E', 'F', '#F', 'G', '#G', 'A', '#A', 'B']
 last_word = ''
 
@@ -27,7 +29,7 @@ def main():
     port = pygame.midi.get_default_output_id()
     midi_out = pygame.midi.Output(port, 0, 8)
     midi_out.set_instrument(insturment)
-    with mido.open_input() as inport:
+    with mido.open_input('Impact GX61 1') as inport:
         for msg in inport:
             if(msg.type == 'note_on'):
                 if(msg.note == BACKSPACE_NOTE):
@@ -138,5 +140,13 @@ def check_accord_three_notes():
         return True
     return False
 
+if __name__ == "__main__":
+    devices = mido.get_input_names()
+    print("Select input device")
+    for index, device in enumerate(devices):
+        print(f"{index}: {device}")
+    
+    selection = int(input())
+    selected_device = devices[selection]
 
-main()
+    main()
